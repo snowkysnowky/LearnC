@@ -1,0 +1,93 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+typedef enum {jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec} month;
+
+void isValidDate(int day_of_month,int d, char* s)
+{
+    if(d>=1 && d<=day_of_month)
+        printf("%s %d\n",s,d);
+}
+
+int day_today(month m, int i)
+{
+    int day_of_month;
+    switch (m)
+    {
+        case jan: day_of_month = 31; 
+                  isValidDate(day_of_month,i,"january");
+                  break;
+        case feb: day_of_month = 28;
+                  isValidDate(day_of_month,i,"february");
+                  break;
+        case mar: day_of_month = 31;
+                  isValidDate(day_of_month,i,"march");
+                  break;
+        case apr: day_of_month = 30;
+                  isValidDate(day_of_month,i,"april");
+                  break;
+        case may: day_of_month = 31;
+                  isValidDate(day_of_month,i,"may");
+                  break;
+        case jun: day_of_month = 30;
+                  isValidDate(day_of_month,i,"june");
+                  break;
+        case jul: day_of_month = 31;
+                  isValidDate(day_of_month,i,"july");
+                  break;
+        case aug: day_of_month = 31;
+                  isValidDate(day_of_month,i,"august");
+                  break;
+        case sep: day_of_month = 30;
+                  isValidDate(day_of_month,i,"september");
+                  break;
+        case oct: day_of_month = 31;
+                  isValidDate(day_of_month,i,"octomber");
+                  break;
+        case nov: day_of_month = 30;
+                  isValidDate(day_of_month,i,"november");
+                  break;
+        case dec: day_of_month = 31;
+                  isValidDate(day_of_month,i,"december");
+                  break;
+        default: printf("Error at input month \n");
+    }
+    return day_of_month;
+}
+
+month next_month(month m)
+{
+        return((m+1)%12);
+}
+
+int next_day(int d)
+{
+    return(d+1);
+}
+
+int main()
+{
+    month a_month = 1 ;
+    int d = 28 ;
+    
+    printf("Give the month and day: ");
+    scanf("%u %d", &a_month, &d);
+    int day_of_month = day_today(a_month, d);
+    if (d > day_of_month)
+    {
+        fprintf(stderr,"Invalid Date");
+        return -1;
+    }
+    else if(d == day_of_month)
+    {
+        a_month = next_month(a_month);
+        d = 1;
+    }
+    else
+        d = next_day(d);
+
+    printf("Next, a_month = %d, d = %d\n",a_month,d);
+
+    return 0;
+}
